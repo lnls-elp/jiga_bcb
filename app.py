@@ -13,7 +13,7 @@ class Application:
     BUTTON_TEST_BCB_3   = "GPIO2_25"
 
     def __init__(self):
-        GPIO.setup(self._TEST_BCB_1, GPIO.OUT)
+        GPIO.setup(self.LED_TEST_BCB_1, GPIO.OUT)
 
     def run(self):
         while True:
