@@ -29,5 +29,5 @@ class Application:
     Run Application
 """
 
-app = Aplication()
+app = Application()
 app.run()
