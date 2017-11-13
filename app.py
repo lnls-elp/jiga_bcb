@@ -19,6 +19,10 @@ class Application:
         GPIO.setup(self.LED_FAIL, GPIO.OUT)
         GPIO.setup(self.LED_PASS, GPIO.OUT)
 
+        GPIO.setup(self.BUTTON_TEST_BCB_1, GPIO.IN)
+        GPIO.setup(self.BUTTON_TEST_BCB_2, GPIO.IN)
+        GPIO.setup(self.BUTTON_TEST_BCB_3, GPIO.IN)
+
         GPIO.output(self.LED_PASS, GPIO.HIGH)
         GPIO.output(self.LED_FAIL, GPIO.HIGH)
 
