@@ -13,6 +13,18 @@ class Application:
             GPIO.output(self.LED, GPIO.LOW)
             time.sleep(0.5)
 
+    def scan_keyboard(self):
+        pass
+
+    def start_test_bcb_var_1(self):
+        pass
+
+    def start_test_bcb_var_2(self):
+        pass
+
+    def start_test_bcb_var_3(self):
+        pass
+
 """
     Run Application
 """
