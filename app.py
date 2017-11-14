@@ -3,7 +3,8 @@ import time
 
 class Application:
     LED_TEST_BCB_1      = "GPIO1_15"
-    LED_TEST_BCB_2      = "GPIO1_30"
+    #LED_TEST_BCB_2      = "GPIO1_30"
+    LED_TEST_BCB_2      = "GPIO1_13"
     LED_TEST_BCB_3      = "GPIO2_10"
     LED_PASS            = "GPIO2_12"
     LED_FAIL            = "GPIO2_11"
@@ -45,9 +46,16 @@ class Application:
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_1, GPIO.HIGH)
-        for i in range(5):
-            print("Realizando teste " + str(i))
-            time.sleep(1)
+        print("Testando Tx Fibra")
+        time.sleep(1)
+        print("Testando Rx Fibra")
+        time.sleep(1)
+        print("Testando I2C")
+        time.sleep(1)
+        print("Testando CAN")
+        time.sleep(1)
+        print("Testando RS-485")
+        time.sleep(1)
 
         GPIO.output(self.LED_PASS, GPIO.HIGH)
         GPIO.output(self.LED_TEST_BCB_1, GPIO.LOW)
@@ -57,9 +65,16 @@ class Application:
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_2, GPIO.HIGH)
-        for i in range(5):
-            print("Realizando teste " + str(i))
-            time.sleep(1)
+        print("Testando Tx Fibra")
+        time.sleep(1)
+        print("Testando Rx Fibra")
+        time.sleep(1)
+        print("Testando I2C")
+        time.sleep(1)
+        print("Testando CAN")
+        time.sleep(1)
+        print("Testando RS-485")
+        time.sleep(1)
 
         GPIO.output(self.LED_PASS, GPIO.HIGH)
         GPIO.output(self.LED_TEST_BCB_2, GPIO.LOW)
@@ -69,9 +84,16 @@ class Application:
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_3, GPIO.HIGH)
-        for i in range(5):
-            print("Realizando teste " + str(i))
-            time.sleep(1)
+        print("Testando Tx Fibra")
+        time.sleep(1)
+        print("Testando Rx Fibra")
+        time.sleep(1)
+        print("Testando I2C")
+        time.sleep(1)
+        print("Testando CAN")
+        time.sleep(1)
+        print("Testando RS-485")
+        time.sleep(1)
 
         GPIO.output(self.LED_PASS, GPIO.HIGH)
         GPIO.output(self.LED_TEST_BCB_3, GPIO.LOW)
