@@ -41,24 +41,44 @@ class Application:
             self.start_test_bcb_var_3()
 
     def start_test_bcb_var_1(self):
-        #TODO: Put here test routin
-        GPIO.output(self.LED_TEST_BCB_1, GPIO.HIGH)
         print("Teste 1 Iniciado")
+        GPIO.output(self.LED_PASS, GPIO.LOW)
+        GPIO.output(self.LED_FAIL, GPIO.LOW)
+        GPIO.output(self.LED_TEST_BCB_1, GPIO.HIGH)
+        for i in range(5):
+            print("Realizando teste " + str(i))
+            time.sleep(1)
+
+        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        GPIO.output(self.LED_TEST_BCB_1, GPIO.LOW)
 
     def start_test_bcb_var_2(self):
-        #TODO: Put here test routin
+        print("Teste 2 Iniciado")
+        GPIO.output(self.LED_PASS, GPIO.LOW)
+        GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_2, GPIO.HIGH)
-        print("Teste 2 Initiado")
+        for i in range(5):
+            print("Realizando teste " + str(i))
+            time.sleep(1)
+
+        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        GPIO.output(self.LED_TEST_BCB_2, GPIO.LOW)
 
     def start_test_bcb_var_3(self):
+        print("Teste 3 Iniciado")
+        GPIO.output(self.LED_PASS, GPIO.LOW)
+        GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_3, GPIO.HIGH)
-        #TODO: Put here test routin
-        print("Teste 2 Initiado")
+        for i in range(5):
+            print("Realizando teste " + str(i))
+            time.sleep(1)
+
+        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        GPIO.output(self.LED_TEST_BCB_3, GPIO.LOW)
 
 
 """
     Run Application
 """
-
 app = Application()
 app.run()
