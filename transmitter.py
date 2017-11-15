@@ -19,4 +19,10 @@ class Transmitter:
             GPIO.output(item, GPIO.HIGH)
             time.sleep(0.1)
             GPIO.output(item, GPIO.LOW)
+        res = None
         # TODO: Pergunta resposta ao UDC
+        if res:
+            print("Transmissores OK")
+            return True
+        print("Transmissores Falha")
+        return False
