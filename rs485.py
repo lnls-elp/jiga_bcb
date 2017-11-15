@@ -1,4 +1,5 @@
-import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.UART as UART
+import serial
 import time
 
 class Rs485:
@@ -10,5 +11,6 @@ class Rs485:
         UART.setup("UART5")
 
     def do_rs485_test(self):
+        print("Iniciando teste de RS485")
         # TODO: Envia dado
         # TODO: Pergunta resposta udc
