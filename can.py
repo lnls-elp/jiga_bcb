@@ -1,3 +1,6 @@
+import Adafruit_BBIO.GPIO as GPIO
+import time
+
 class Can:
 
     def __init__(self):
