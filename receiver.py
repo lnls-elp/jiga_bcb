@@ -27,16 +27,28 @@ class Receiver:
             GPIO.setup(item, GPIO.IN)
 
     def do_receiver_test_1(self):
-        # TODO: Envia comand'o para Udc
-        # Le' todos os receivers
-        pass
+        acum = 0
+        expected = 18
+
+        print("Iniciando teste dos receptores de fibra")
+
+        for item in self._receiver:
+            GPIO.add_event_detect(item, GPIO.FALLING)
+        # TODO: Manda o UDC iniciar o teste
+
+        time.sleep(0.3)
+        for item in self._receiver:
+            if GPIO.event_detected(item):
+                acum += 1
+
+        if acum is expected:
+            print("Receiver OK")
+            return True
+        print("Receiver Falha")
+        return False
 
     def do_receiver_test_2(self):
-        # TODO: Envia comando para Udc
-        # Le todos os receivers
-        pass
+        return self.do_receiver_test_1()
 
     def do_receiver_test_3(self):
-        # TODO: Envia comando para Udc
-        # Le todos os receivers
-        pass
+        return self.do_receiver_test_1()

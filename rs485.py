@@ -21,5 +21,7 @@ class Rs485:
             res = ser.read()
             ser.close()
             if res is test_val:
+                print("RS485 OK")
                 return True
+        print("RS485 Falha")
         return False
