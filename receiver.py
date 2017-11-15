@@ -10,7 +10,7 @@ class Receiver:
                             'GPIO1_3', 'GPIO1_7', 'GPIO1_31', 'GPIO2_8',
                             'GPIO2_9', 'GPIO2_13']
 
-        # Cannot be used (reserved):
+        # Cannot be used (reserved):fr
         #   - GPIO1_0
         #   - GPIO1_4
         #   - GPIO1_1
@@ -26,14 +26,17 @@ class Receiver:
         for item in pins:
             GPIO.setup(item, GPIO.IN)
 
-    def do_receiver_test_bcb_1(self):
-        # TODO: Envia comando para Udc
-        # Le todos os receivers
+    def do_receiver_test_1(self):
+        # TODO: Envia comand'o para Udc
+        # Le' todos os receivers
+        pass
 
-    def do_receiver_test_bcb_2(self):
+    def do_receiver_test_2(self):
         # TODO: Envia comando para Udc
         # Le todos os receivers
+        pass
 
-    def do_receiver_test_bcb_3(self):
+    def do_receiver_test_3(self):
         # TODO: Envia comando para Udc
         # Le todos os receivers
+        pass

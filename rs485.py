@@ -9,6 +9,6 @@ class Rs485:
     def setup_pins(self):
         UART.setup("UART5")
 
-    def do_rs485_test_bcb(self):
+    def do_rs485_test(self):
         # TODO: Envia dado
         # TODO: Pergunta resposta udc

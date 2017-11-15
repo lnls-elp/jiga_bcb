@@ -14,7 +14,7 @@ class Transmitter:
         for item in pins:
             GPIO.output(item, GPIO.LOW)
 
-    def do_transmitter_test_bcb(self):
+    def do_transmitter_test(self):
         for item in self._transmitter:
             GPIO.output(item, GPIO.HIGH)
             time.sleep(0.1)

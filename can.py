@@ -9,6 +9,7 @@ class Can:
     def setup_pins(self):
         pass
 
-    def do_can_test_bcb(self):
+    def do_can_test(self):
         # TODO: Envia dado
         # TODO: Pergunta resposta udc
+        pass

@@ -1,5 +1,9 @@
 import Adafruit_BBIO.GPIO as GPIO
-from can import CAN
+from can import Can
+from i2c import I2C
+from rs485 import RS485
+from receiver import Receiver
+from transmitter import Transmitter
 from pydrs import SerialDRS
 import time
 
@@ -16,6 +20,13 @@ class Application:
     BUTTON_TEST_BCB_3   = "GPIO2_25"
 
     def __init__(self):
+
+        self._can_test      = Can()
+        self._i2c_test      = I2c()
+        self._rs485_test    = Rs485()
+        self._rx_test       = Receiver()
+        self._tx_test       = Transmitter()
+
         GPIO.setup(self.LED_TEST_BCB_1, GPIO.OUT)
         GPIO.setup(self.LED_TEST_BCB_2, GPIO.OUT)
         GPIO.setup(self.LED_TEST_BCB_3, GPIO.OUT)
@@ -44,62 +55,61 @@ class Application:
             self.start_test_bcb_var_3()
 
     def start_test_bcb_var_1(self):
-        print("Teste 1 Iniciado")
+        print("Iniciando Teste BCB - Versao 1")
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_1, GPIO.HIGH)
-        print("Testando Tx Fibra")
-        time.sleep(1)
-        print("Testando Rx Fibra")
-        time.sleep(1)
-        print("Testando I2C")
-        time.sleep(1)
-        print("Testando CAN")
-        time.sleep(1)
-        print("Testando RS-485")
-        time.sleep(1)
 
-        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        rs485_res   = self._rs485_test.do_rs485_test()
+        tx_res      = self._tx_test.do_transmitter_test()
+        rx_res      = self._rx_test.do_receiver_test_1()
+        can_res     = self._can_test.do_can_test()
+        i2c_res     = self._i2c_test.do_i2c_test()
+
+        if rs485_res and tx_res and rx_res and can_res and i2c_res:
+            GPIO.output(self.LED_PASS, GPIO.HIGH)
+        else:
+            GPIO.output(self.LED_FAIL, GPIO.HIGH)
+
         GPIO.output(self.LED_TEST_BCB_1, GPIO.LOW)
 
     def start_test_bcb_var_2(self):
-        print("Teste 2 Iniciado")
+        print("Iniciando Teste BCB - Versao 2")
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_2, GPIO.HIGH)
-        print("Testando Tx Fibra")
-        time.sleep(1)
-        print("Testando Rx Fibra")
-        time.sleep(1)
-        print("Testando I2C")
-        time.sleep(1)
-        print("Testando CAN")
-        time.sleep(1)
-        print("Testando RS-485")
-        time.sleep(1)
 
-        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        rs485_res   = self._rs485_test.do_rs485_test()
+        tx_res      = self._tx_test.do_transmitter_test()
+        rx_res      = self._rx_test.do_receiver_test_2()
+        can_res     = self._can_test.do_can_test()
+        i2c_res     = self._i2c_test.do_i2c_test()
+
+        if rs485_res and tx_res and rx_res and can_res and i2c_res:
+            GPIO.output(self.LED_PASS, GPIO.HIGH)
+        else:
+            GPIO.output(self.LED_FAIL, GPIO.HIGH)
+
         GPIO.output(self.LED_TEST_BCB_2, GPIO.LOW)
 
     def start_test_bcb_var_3(self):
-        print("Teste 3 Iniciado")
+        print("Iniciando Teste BCB - Versao 3")
         GPIO.output(self.LED_PASS, GPIO.LOW)
         GPIO.output(self.LED_FAIL, GPIO.LOW)
         GPIO.output(self.LED_TEST_BCB_3, GPIO.HIGH)
-        print("Testando Tx Fibra")
-        time.sleep(1)
-        print("Testando Rx Fibra")
-        time.sleep(1)
-        print("Testando I2C")
-        time.sleep(1)
-        print("Testando CAN")
-        time.sleep(1)
-        print("Testando RS-485")
-        time.sleep(1)
 
-        GPIO.output(self.LED_PASS, GPIO.HIGH)
+        rs485_res   = self._rs485_test.do_rs485_test()
+        tx_res      = self._tx_test.do_transmitter_test()
+        rx_res      = self._rx_test.do_receiver_test_3()
+        can_res     = self._can_test.do_can_test()
+        i2c_res     = self._i2c_test.do_i2c_test()
+
+        if rs485_res and tx_res and rx_res and can_res and i2c_res:
+            GPIO.output(self.LED_PASS, GPIO.HIGH)
+        else:
+            GPIO.output(self.LED_FAIL, GPIO.HIGH)
+
         GPIO.output(self.LED_TEST_BCB_3, GPIO.LOW)
-
 
 """
     Run Application

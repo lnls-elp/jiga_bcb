@@ -9,6 +9,7 @@ class I2c:
     def setup_pins(self):
         pass
 
-    def do_i2c_test_bcb(self):
+    def do_i2c_test(self):
         # TODO: Envia dado
         # TODO: Pergunta resposta udc
+        pass
