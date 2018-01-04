@@ -1,51 +1,41 @@
-import Adafruit_BBIO.GPIO as GPIO
+from Adafruit_BBIO.SPI import SPI
 import time
 
 class Receiver:
 
     def __init__(self):
-        self._receiver =    ['GPIO1_0', 'GPIO1_4', 'GPIO1_12', 'GPIO2_1',
-                            'GPIO1_1', 'GPIO1_5', 'GPIO1_14', 'GPIO2_6',
-                            'GPIO1_2', 'GPIO1_6', 'GPIO1_29', 'GPIO2_27',
-                            'GPIO1_3', 'GPIO1_7', 'GPIO1_31', 'GPIO2_8',
-                            'GPIO2_9', 'GPIO2_13']
+        self._
 
-        # Cannot be used (reserved):fr
-        #   - GPIO1_0
-        #   - GPIO1_4
-        #   - GPIO1_1
-        #   - GPIO1_5
-        #   - GPIO1_2
-        #   - GPIO1_6
-        #   - GPIO1_3
-        #   - GPIO1_7
-        #   - GPIO1_31
-        self.setup_pins(self._receiver)
+        self._gpio0_sts_add = 0 # GPIO state for P0-P7
+        self._gpio1_sts_add = 1 # GPIO state for P8-P15
+        self._gpio0_cfg_add = 6 # GPIO configuration for P0-P7
+                                # Default value 0xFF
+                                # If bit is 1, the GPIO is input
+        self._gpio1_cfg_add = 7 # GPIO configuration for P8-15
+                                # Default value 0xFF
+                                # If bit is 1, the GPIO is input
 
-    def setup_pins(self, pins):
-        for item in pins:
-            GPIO.setup(item, GPIO.IN)
+        self._spi = SPI(0, 0)
+
 
     def do_receiver_test_1(self):
-        acum = 0
-        expected = 18
 
         print("Iniciando teste dos receptores de fibra")
 
-        for item in self._receiver:
-            GPIO.add_event_detect(item, GPIO.FALLING)
-        # TODO: Manda o UDC iniciar o teste
+        # TODO: Send command to set GPIOs
 
-        time.sleep(0.3)
-        for item in self._receiver:
-            if GPIO.event_detected(item):
-                acum += 1
+        self._spi.writebytes([self._gpio0_sts_add])
+        res0 = self._spi.readbytes(1)
 
-        if acum is expected:
+        self._spi.writebytes([self._gpio1_sts_add])
+        res1 = self._spi.readbytes(1)
+
+        if res0 is 15 and res1 is 15:
             print("Receiver OK")
             return True
-        print("Receiver Falha")
-        return False
+        else:
+            print("Receiver Falha")
+            return False
 
     def do_receiver_test_2(self):
         return self.do_receiver_test_1()
