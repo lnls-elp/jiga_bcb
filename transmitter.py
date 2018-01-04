@@ -15,14 +15,27 @@ class Transmitter:
             GPIO.output(item, GPIO.LOW)
 
     def do_transmitter_test(self):
+
+        print("Iniciando teste dos transmissores de fibra")
+
         for item in self._transmitter:
-            GPIO.output(item, GPIO.HIGH)
-            time.sleep(0.1)
             GPIO.output(item, GPIO.LOW)
-        res = None
-        # TODO: Pergunta resposta ao UDC
-        if res:
-            print("Transmissores OK")
-            return True
-        print("Transmissores Falha")
-        return False
+
+        #TODO: Ask status from UdcComTest
+        # sts = self._tx_status()
+        sts = None
+
+        if sts is 0:
+            for item in self._transmitter:
+                GPIO.output(item, GPIO.HIGH)
+
+            #TODO: Ask status from UdcComTest
+            # sts = self._tx_status()
+            if sts is 15:
+                print("Transmissores OK")
+                return True
+            else:
+                return False
+        else:
+            print("Transmissores Falha")
+            return False

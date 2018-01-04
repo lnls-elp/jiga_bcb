@@ -30,7 +30,7 @@ class Receiver:
         self._spi.writebytes([self._gpio1_sts_add])
         res1 = self._spi.readbytes(1)
 
-        if res0 is 15 and res1 is 15:
+        if res0 is 255 and res1 is 255:
             print("Receiver OK")
             return True
         else:
