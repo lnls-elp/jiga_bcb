@@ -22,7 +22,7 @@ class Receiver:
 
         print("Iniciando teste dos receptores de fibra")
 
-        # TODO: Send command to set GPIOs
+        # TODO: Send command to clear GPIOS
 
         self._spi.writebytes([self._gpio0_sts_add])
         res0 = self._spi.readbytes(1)
@@ -30,12 +30,21 @@ class Receiver:
         self._spi.writebytes([self._gpio1_sts_add])
         res1 = self._spi.readbytes(1)
 
-        if res0 is 255 and res1 is 255:
-            print("Receiver OK")
-            return True
-        else:
-            print("Receiver Falha")
-            return False
+        if res0 is 0 and res1 is 0:
+            # TODO: Send command to set GPIOs
+
+            self._spi.writebytes([self._gpio0_sts_add])
+            res0 = self._spi.readbytes(1)
+
+            self._spi.writebytes([self._gpio1_sts_add])
+            res1 = self._spi.readbytes(1)
+
+            if res0 is 255 and res1 is 255:
+                print("Receiver OK")
+                return True
+
+        print("Falha Receptores")
+        return False
 
     def do_receiver_test_2(self):
         return self.do_receiver_test_1()

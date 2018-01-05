@@ -3,13 +3,12 @@ from can import Can
 from i2c import I2c
 from rs485 import Rs485
 from receiver import Receiver
-from transmitter import Transmitter
+from synctx import Transmitter
 from pydrs import SerialDRS
 import time
 
 class Application:
     LED_TEST_BCB_1      = "GPIO1_15"
-    #LED_TEST_BCB_2      = "GPIO1_30"
     LED_TEST_BCB_2      = "GPIO1_13"
     LED_TEST_BCB_3      = "GPIO2_10"
     LED_PASS            = "GPIO2_12"
