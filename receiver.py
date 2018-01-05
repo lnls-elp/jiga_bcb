@@ -4,7 +4,6 @@ import time
 class Receiver:
 
     def __init__(self):
-        self._
 
         self._gpio0_sts_add = 0 # GPIO state for P0-P7
         self._gpio1_sts_add = 1 # GPIO state for P8-P15
