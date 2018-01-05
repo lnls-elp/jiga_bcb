@@ -11,8 +11,11 @@ import struct
 import glob
 import serial
 import time
+import sys
 
 from datetime import datetime
+
+sys.dont_write_bytecode = True
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 ======================================================================

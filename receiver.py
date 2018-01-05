@@ -1,5 +1,8 @@
 from Adafruit_BBIO.SPI import SPI
 import time
+import sys
+
+sys.dont_write_bytecode = True
 
 class Receiver:
 

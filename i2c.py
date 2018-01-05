@@ -1,5 +1,8 @@
 from Adafruit_I2C import Adafruit_I2C
 import time
+import sys
+
+sys.dont_write_bytecode = True
 
 class I2c:
 
@@ -12,10 +15,10 @@ class I2c:
 
     def do_i2c_test(self):
         print("Iniciando teste I2C")
-        self._i2c.write8(self._reg_add, self._value)
+        self._i2c.write8(self._reg_add, self._test_val)
         res = self._i2c.readU8(self._reg_add)
         if res is not None:
-            if res is self._value:
+            if res is self._test_val:
                 print("I2C OK")
                 return True
         print("I2C Falha")

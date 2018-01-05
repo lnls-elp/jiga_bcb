@@ -1,10 +1,13 @@
 import Adafruit_BBIO.GPIO as GPIO
 import time
+import sys
+
+sys.dont_write_bytecode = True
 
 class Transmitter:
 
     def __init__(self):
-        self._transmitter = ['GPIO1_16', 'GPIO1_17', 'GPIO3_21', 'GPIO3_19']
+        self._transmitter = ['GPIO1_12', 'GPIO1_13', 'GPIO1_14', 'GPIO1_15']
         self.setup_pins(self._transmitter)
 
     def setup_pins(self, pins):
