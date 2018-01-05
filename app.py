@@ -4,6 +4,7 @@ from i2c import I2c
 from rs485 import Rs485
 from receiver import Receiver
 from synctx import Transmitter
+from syncrx import SyncRecv
 from pydrs import SerialDRS
 import time
 
