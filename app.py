@@ -1,5 +1,5 @@
 import Adafruit_BBIO.GPIO as GPIO
-from can import Can
+from canbus import CanBus
 from i2c import I2c
 from rs485 import Rs485
 from receiver import Receiver
@@ -20,11 +20,12 @@ class Application:
 
     def __init__(self):
 
-        self._can_test      = Can()
+        self._can_test      = CanBus()
         self._i2c_test      = I2c()
         self._rs485_test    = Rs485()
         self._rx_test       = Receiver()
         self._tx_test       = Transmitter()
+        self._rx_sync_test  = SyncRecv()
 
         GPIO.setup(self.LED_TEST_BCB_1, GPIO.OUT)
         GPIO.setup(self.LED_TEST_BCB_2, GPIO.OUT)
@@ -64,6 +65,7 @@ class Application:
         rx_res      = self._rx_test.do_receiver_test_1()
         can_res     = self._can_test.do_can_test()
         i2c_res     = self._i2c_test.do_i2c_test()
+        sync_recv   = self._rx_sync_test.do_syncrecv_test()
 
         if rs485_res and tx_res and rx_res and can_res and i2c_res:
             GPIO.output(self.LED_PASS, GPIO.HIGH)
@@ -83,6 +85,7 @@ class Application:
         rx_res      = self._rx_test.do_receiver_test_2()
         can_res     = self._can_test.do_can_test()
         i2c_res     = self._i2c_test.do_i2c_test()
+        sync_recv   = self._rx_sync_test.do_syncrecv_test()
 
         if rs485_res and tx_res and rx_res and can_res and i2c_res:
             GPIO.output(self.LED_PASS, GPIO.HIGH)
@@ -102,6 +105,7 @@ class Application:
         rx_res      = self._rx_test.do_receiver_test_3()
         can_res     = self._can_test.do_can_test()
         i2c_res     = self._i2c_test.do_i2c_test()
+        sync_recv   = self._rx_sync_test.do_syncrecv_test()
 
         if rs485_res and tx_res and rx_res and can_res and i2c_res:
             GPIO.output(self.LED_PASS, GPIO.HIGH)

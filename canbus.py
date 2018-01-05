@@ -1,7 +1,7 @@
 import can
 import time
 
-class Can:
+class CanBus:
 
     def __init__(self):
         self._bus = can.interface.Bus(channel='can0', bustype='socketcan_ctypes')
