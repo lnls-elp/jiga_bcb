@@ -21,6 +21,14 @@ class SyncRecv:
         GPIO.setup(self._sync_out_pin, GPIO.OUT)
 
     def do_syncrecv_test(self):
+
+        drs = SerialDRS()
+        conn = drs.Connect(self._comport, self._baudrate)
+
+        if not conn:
+            print("Erro conexao serial")
+            return False
+
         print("Iniciando teste dos receptores de fibra - sync")
         GPIO.output(self._sync_out_pin, GPIO.HIGH)
 
@@ -33,14 +41,16 @@ class SyncRecv:
 
             if sts_sync_in:
 
-                # TODO: Command to clear GPIOs
+                drs.ClearPof()
 
                 sts_epwm_sync = GPIO.input(self._epwm_sync_pin)
                 if not sts_epwm_sync:
 
-                    # TODO: Send command to set GPIOs
+                    drs.SetPof()
                     sts_epwm_sync = GPIO.input(self._epwm_sync_pin)
                     if sts_epwm_sync:
+                        drs.Disconnect()
                         return True
         print("Falha receptores sync")
+        drs.Disconnect()
         return False

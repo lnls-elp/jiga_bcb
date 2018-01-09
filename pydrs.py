@@ -42,6 +42,7 @@ ListFunc = ['TurnOn','TurnOff','OpenLoop','ClosedLoop','OpMode','RemoteInterface
 ListTestFunc = ['UdcIoExpanderTest', 'UdcLedTest', 'UdcBuzzerTest', 'UdcEepromTest', 'UdcFlashTest', 'UdcRamTest',
                 'UdcRtcTest', 'UdcSensorTempTest', 'UdcIsoPlaneTest', 'UdcAdcTest', 'UdcUartTest', 'UdcLoopBackTest',
                 'UdcComTest', 'UdcI2cIsoTest']
+ListBCBFunc = ['SetPof', 'ClearPof', 'ReadPof', 'EnableBuzzer', 'DisableBuzzer']
 ListHRADCInputType = ['Vin_bipolar','Vin_unipolar_p','Vin_unipolar_n','Iin_bipolar','Iin_unipolar_p',
                       'Iin_unipolar_n','Vref_bipolar_p','Vref_bipolar_n','GND','Vref_unipolar_p',
                       'Vref_unipolar_n','GND_unipolar','Temp','Reserved0','Reserved1','Reserved2']
@@ -578,6 +579,40 @@ class SerialDRS(object):
         self.ser.write(send_msg.encode('ISO-8859-1'))
         return self.ser.read(6)
 
+    def SetPof(self):
+        payload_size   = self.size_to_hex(1) #Payload: ID
+        send_packet    = self.ComFunction+payload_size+self.index_to_hex(ListBCBFunc.index('SetPof'))
+        send_msg       = self.checksum(self.SlaveAdd+send_packet)
+        self.ser.write(send_msg.encode('ISO-8859-1'))
+        return self.ser.read(6)
+
+    def ClearPof(self):
+        payload_size   = self.size_to_hex(1) #Payload: ID
+        send_packet    = self.ComFunction+payload_size+self.index_to_hex(ListBCBFunc.index('ClearPof'))
+        send_msg       = self.checksum(self.SlaveAdd+send_packet)
+        self.ser.write(send_msg.encode('ISO-8859-1'))
+        return self.ser.read(6)
+
+    def ReadPof(self):
+        payload_size   = self.size_to_hex(1) #Payload: ID
+        send_packet    = self.ComFunction+payload_size+self.index_to_hex(ListBCBFunc.index('ReadPof'))
+        send_msg       = self.checksum(self.SlaveAdd+send_packet)
+        self.ser.write(send_msg.encode('ISO-8859-1'))
+        return self.ser.read(6)
+
+    def EnableBuzzer(self):
+        payload_size   = self.size_to_hex(1) #Payload: ID
+        send_packet    = self.ComFunction+payload_size+self.index_to_hex(ListBCBFunc.index('EnableBuzzer'))
+        send_msg       = self.checksum(self.SlaveAdd+send_packet)
+        self.ser.write(send_msg.encode('ISO-8859-1'))
+        return self.ser.read(6)
+
+    def DisableBuzzer(self):
+        payload_size   = self.size_to_hex(1) #Payload: ID
+        send_packet    = self.ComFunction+payload_size+self.index_to_hex(ListBCBFunc.index('DisableBuzzer'))
+        send_msg       = self.checksum(self.SlaveAdd+send_packet)
+        self.ser.write(send_msg.encode('ISO-8859-1'))
+        return self.ser.read(6)
 
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     ======================================================================

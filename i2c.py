@@ -9,7 +9,7 @@ class I2c:
     def __init__(self):
         self._slave_add = 0xA5
         self._reg_add   = 0x01
-        self._test_val  = 0x5A
+        self._test_val  = 0xA5
 
         self._i2c = Adafruit_I2C(self._slave_add)
 
