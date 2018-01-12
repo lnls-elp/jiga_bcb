@@ -42,7 +42,7 @@ ListFunc = ['TurnOn','TurnOff','OpenLoop','ClosedLoop','OpMode','RemoteInterface
 ListTestFunc = ['UdcIoExpanderTest', 'UdcLedTest', 'UdcBuzzerTest', 'UdcEepromTest', 'UdcFlashTest', 'UdcRamTest',
                 'UdcRtcTest', 'UdcSensorTempTest', 'UdcIsoPlaneTest', 'UdcAdcTest', 'UdcUartTest', 'UdcLoopBackTest',
                 'UdcComTest', 'UdcI2cIsoTest']
-ListBCBFunc = ['SetPof', 'ClearPof', 'ReadPof', 'EnableBuzzer', 'DisableBuzzer']
+ListBCBFunc = ['ClearPof', 'SetPof', 'ReadPof', 'EnableBuzzer', 'DisableBuzzer']
 ListHRADCInputType = ['Vin_bipolar','Vin_unipolar_p','Vin_unipolar_n','Iin_bipolar','Iin_unipolar_p',
                       'Iin_unipolar_n','Vref_bipolar_p','Vref_bipolar_n','GND','Vref_unipolar_p',
                       'Vref_unipolar_n','GND_unipolar','Temp','Reserved0','Reserved1','Reserved2']
