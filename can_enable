@@ -1,11 +1,9 @@
 #!/bin/bash
 # Enable DCAN1
 
-echo BB-DCAN1 > /sys/devices/bone_capemgr.*/slots
-
 modprobe can
 modprobe can-dev
 modprobe can-raw
 
-sudo ip link set can0 up type can bitrate 500000
+sudo ip link set can0 up type can bitrate 1000000
 sudo ifconfig can0 up

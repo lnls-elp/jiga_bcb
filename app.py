@@ -7,17 +7,20 @@ from synctx import Transmitter
 from syncrx import SyncRecv
 from pydrs import SerialDRS
 import time
+import sys
+
+sys.dont_write_bytecode = True
 
 class Application:
-    LED_TEST_BCB_1      = "GPIO1_15"
-    LED_TEST_BCB_2      = "GPIO1_13"
-    LED_TEST_BCB_3      = "GPIO2_10"
-    LED_PASS            = "GPIO2_12"
-    LED_FAIL            = "GPIO2_11"
+    LED_TEST_BCB_1      = "GPIO0_27"
+    LED_TEST_BCB_2      = "GPIO2_1"
+    LED_TEST_BCB_3      = "GPIO2_12"
+    LED_PASS            = "GPIO2_24"
+    LED_FAIL            = "GPIO2_22"
 
-    BUTTON_TEST_BCB_1   = "GPIO2_23"
-    BUTTON_TEST_BCB_2   = "GPIO2_24"
-    BUTTON_TEST_BCB_3   = "GPIO2_25"
+    BUTTON_TEST_BCB_1   = "GPIO1_16"
+    BUTTON_TEST_BCB_2   = "GPIO1_17"
+    BUTTON_TEST_BCB_3   = "GPIO1_28"
 
     def __init__(self):
 
