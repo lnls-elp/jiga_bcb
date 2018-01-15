@@ -17,7 +17,7 @@ class Receiver:
         self._baudrate          = '115200'
 
         self._spi = SPI(1,0)
-        self._spi.msh = 10000
+        self._spi.msh = 1000000
 
         self._spi.xfer2([0x06, 0xFF])   # Configure GPIO0 as input
         self._spi.xfer2([0x07, 0xFF])   # Configure GPIO1 as input
@@ -41,8 +41,10 @@ class Receiver:
 
         print("Iniciando teste dos receptores de fibra")
 
+        print('Desligando transmissores')
         drs.ClearPof()
 
+        print('Lendo status')
         data_reg0 = self._spi.xfer2([self._gpio0_sts_read, self._dummy_data])
         data_reg1 = self._spi.xfer2([self._gpio1_sts_read, self._dummy_data])
 
@@ -54,13 +56,18 @@ class Receiver:
 
         if res0 is 255 and res1 is 255:
 
+            print('Ligando transmissores')
             drs.SetPof()
 
+            print('Lendo status')
             data_reg0 = self._spi.xfer([self._gpio0_sts_read, self._dummy_data])
             res0 = data_reg0[1]
 
             data_reg1 = self._spi.xfer([self._gpio1_sts_read, self._dummy_data])
             res1 = data_reg1[1]
+
+            print('Res 0: ' + str(res0))
+            print('Res 1: ' + str(res1))
 
             if res0 is 0 and res1 is 0:
                 print("Receptores OK")
@@ -124,11 +131,11 @@ class Receiver:
 
         if not conn:
             print("Erro conexao serial")
-            drs.ClearPof()
             return False
 
         print("Iniciando teste dos receptores de fibra")
 
+        drs.ClearPof()
 
         data_reg1 = self._spi.xfer2([self._gpio1_sts_read, self._dummy_data])
         res1 = data_reg1[1]

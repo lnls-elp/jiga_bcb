@@ -8,10 +8,11 @@ sys.dont_write_bytecode = True
 class SyncRecv:
 
     def __init__(self):
-
+        self._comport       = '/dev/ttyUSB0'
+        self._baudrate      = '115200'
         self._epwm_sync_pin = 'GPIO2_23'    # Input in BBB perspective
         self._sync_in_pin   = 'GPIO2_25'    # Input in BBB perspective
-        self._sync_out_pin   = 'GPIO1_14'   # Output in BBB perspective
+        self._sync_out_pin  = 'GPIO1_14'   # Output in BBB perspective
 
         self.setup_pins()
 
@@ -31,25 +32,37 @@ class SyncRecv:
             return False
 
         print("Iniciando teste dos receptores de fibra - sync")
-        GPIO.output(self._sync_out_pin, GPIO.HIGH)
+        print('Desliga transmissor sync')
+        GPIO.output(self._sync_out_pin, GPIO.HIGH) # Desliga transmissor
 
+        print('Le receptor sync (Esperado = 1)')
         sts_sync_in = GPIO.input(self._sync_in_pin)
+        print('status: ' + str(sts_sync_in))
 
-        if not sts_sync_in:
+        if sts_sync_in:
 
+            print('Liga transmissor sync')
             GPIO.output(self._sync_out_pin, GPIO.LOW)
+            print('Le receptor sync (Esperado = 0)')
             sts_sync_in = GPIO.input(self._sync_in_pin)
+            print('status: ' + str(sts_sync_in))
 
-            if sts_sync_in:
+            if not sts_sync_in:
 
+                print('DRS desligando todos os transmissores')
                 drs.ClearPof()
 
+                print('Lendo EPWM sync (Esperado = 1)')
                 sts_epwm_sync = GPIO.input(self._epwm_sync_pin)
-                if not sts_epwm_sync:
+                print('status: ' + str(sts_epwm_sync))
+                if sts_epwm_sync:
 
+                    print('DRS ligando todos os transmissores')
                     drs.SetPof()
+                    print('Lendo EPWM sync (Esperado = 0)')
                     sts_epwm_sync = GPIO.input(self._epwm_sync_pin)
-                    if sts_epwm_sync:
+                    print('status: ' + str(sts_epwm_sync))
+                    if not sts_epwm_sync:
                         drs.Disconnect()
                         return True
         print("Falha receptores sync")

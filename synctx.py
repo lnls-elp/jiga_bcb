@@ -8,15 +8,16 @@ sys.dont_write_bytecode = True
 class Transmitter:
 
     def __init__(self):
-        self._transmitter = ['GPIO1_12', 'GPIO1_13', 'GPIO1_14', 'GPIO1_15']
-        self.setup_pins(self._transmitter)
+        self._comport       = '/dev/ttyUSB0'
+        self._baudrate      = '115200'
+        self._transmitter   = ['GPIO1_12', 'GPIO1_13', 'GPIO1_14', 'GPIO1_15']
+        self.setup_pins()
 
-    def setup_pins(self, pins):
-        for item in pins:
+    def setup_pins(self):
+        for item in self._transmitter:
             GPIO.setup(item, GPIO.OUT)
 
-        for item in pins:
-            GPIO.output(item, GPIO.LOW)
+        self.disable_all()
 
     def do_transmitter_test(self):
 
@@ -29,25 +30,39 @@ class Transmitter:
 
         print("Iniciando teste dos transmissores de fibra")
 
-        for item in self._transmitter:
-            GPIO.output(item, GPIO.LOW)
+        print('Desligando transmissores')
+        self.disable_all()
 
-        sts = drs.ReadPof()
+        print('Lendo transmissores')
+        data = ReadPof()
+        sts = ord(data[4]) # Convert to int
+        print('Valor lido: ' + str(sts))
 
-        if sts is 0:
-            for item in self._transmitter:
-                GPIO.output(item, GPIO.HIGH)
+        if sts is 15:
+            print('Ligando transmissores')
+            self.enable_all()
 
-            drs.ReadPof()
+            print('Lendo transmissores')
+            data = drs.ReadPof()
+            sts = ord(data[4]) # Convert to int
+            print('Valor lido: ' + str(sts))
 
             drs.Disconnect()
 
-            if sts is 15:
+            if sts is 0:
                 print("Transmissores OK")
                 return True
             else:
                 return False
         else:
             print("Transmissores Falha")
-            drs.Disconnect()
             return False
+            drs.Disconnect()
+
+    def enable_all(self):
+        for item in self._transmitter:
+            GPIO.output(item, GPIO.LOW)    # Enable transmitters
+
+    def disable_all(self):
+        for item in self._transmitter:
+            GPIO.output(item, GPIO.HIGH)    # Disable transmitters
